@@ -1,0 +1,120 @@
+add_newline = true
+command_timeout = 1000
+
+
+format = """
+[╭─](hora)\
+    [【](simbols)\
+		  $os\
+      $localip \
+      $directory\      
+    [】](simbols)
+[│  ](hora)\
+      $git_branch\
+      $git_status\
+      $python\
+      $nodejs\
+	    $rust\
+	    $lua
+[╰─](hora)\
+     $memory_usage\
+     $time\
+     $cmd_duration    
+$shell"""
+
+palette = 'foo'
+[palettes.foo]
+js="#F8F988"
+simbols="#9C254D"
+hora="#fff"
+color3="#5E6265"
+python="#009EFF"
+git="#FAAB78"
+gits="#ffffff"
+pack="#CFF5E7"
+name="#F5EDCE"
+host="#E5BA73"
+sepa="#A8E890"
+pwd="#EDE4E0"
+
+[shell]
+powershell_indicator = ">"
+zsh_indicator = " "
+disabled= false
+
+
+[time]
+disabled = false
+time_format = "%T"
+format = "[  ](color3)[$time](hora)"
+use_12hr = true
+
+[directory]
+disabled = false
+read_only = " "
+truncation_length = 2
+truncation_symbol = '…/'
+truncate_to_repo = false
+format = "[$read_only](sepa)[$path](pwd) "
+home_symbol = "~"
+
+# [directory.substitution]
+# "~" = ""
+# _
+
+[cmd_duration]
+disabled = false
+min_time = 2000
+show_milliseconds = true
+show_notifications = false
+min_time_to_notify = 45_000
+format = "[ 祥](color3)[$duration](hora) "
+
+[git_status]
+stashed = " \\(${count}\\) "
+ahead = " ﲗ ${count}"
+behind = " ﲔ ${count}"
+diverged = " 李 ${ahead_count} ${behind_count}"
+conflicted = "  ${count}"
+deleted = " [  ${count}](gits)"   
+renamed = " 﫦${count}"
+modified = "[  \\(${count}\\) ](gits)"   
+staged = " [  ${count}](gits)"   
+untracked = "  \\(${count}\\)"
+format = "([$all_status$ahead_behind](gits)) "
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch](git)"
+
+#=== languages ===
+
+[nodejs]
+symbol = "  "
+format = "[$symbol($version)](js)"
+
+[python]
+symbol = "  "
+pyenv_prefix = 'pyenv '
+python_binary = "python"
+format = '[$symbol$pyenv_prefix$version(\($virtualenv\))](python)'
+
+[rust]
+symbol = "🦀 "
+format = ' [$symbol$version](red bold)'
+
+[lua]
+format = ' [ ($version)](bold blue) '
+
+[localip]
+ssh_only = false
+format = ' [$localipv4](bold red) '
+disabled = false
+
+[os]
+format = "[$symbol]($style)"
+style = "bold blue"
+disabled = false
+
+[os.symbols]
+Windows = " "
